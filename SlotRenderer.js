@@ -1,0 +1,40 @@
+import { SCATTER_ID, SLOT_CONFIG } from './config.js';
+
+export class SlotRenderer {
+    static draw(ctx, state) {
+        const { reels, reelOffsets, isWinState, winningItems, isAnticipating, reelWidth, rowHeight } = state;
+        ctx.clearRect(0, 0, SLOT_CONFIG.canvasWidth, SLOT_CONFIG.canvasHeight);
+
+        for (let i = 0; i < SLOT_CONFIG.reels; i++) {
+            const x = i * (reelWidth + SLOT_CONFIG.spacing);
+            for (let j = 0; j < reels[i].length; j++) {
+                const item = reels[i][j];
+                if (!item) continue;
+                const y = (j - 1) * rowHeight + reelOffsets[i];
+                const size = reelWidth * 0.85;
+
+                ctx.save();
+                // Scatter Glow Effect
+                if (item.id === SCATTER_ID && (isWinState || isAnticipating)) {
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = "gold";
+                }
+
+                // Win Highlight Effect
+                if (isWinState) {
+                    const isWinner = winningItems.some(w => w.col === i && w.row === j);
+                    if (!isWinner) {
+                        ctx.globalAlpha = 0.2;
+                        ctx.filter = 'grayscale(100%)';
+                    }
+                }
+
+                ctx.beginPath();
+                ctx.rect(x, 0, reelWidth, SLOT_CONFIG.canvasHeight);
+                ctx.clip();
+                ctx.drawImage(item.img, x + (reelWidth - size) / 2, y + (rowHeight - size) / 2, size, size);
+                ctx.restore();
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dragon Slot - Multi-Path Wins</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="jackpot-container">
+        <div class="jp-box"><span class="jp-label">GRAND</span><span class="jp-value">$10,000</span></div>
+        <div class="jp-box"><span class="jp-label">MAJOR</span><span class="jp-value">$5,000</span></div>
+        <div class="jp-box"><span class="jp-label">MINOR</span><span class="jp-value">$1,000</span></div>
+        <div class="jp-box"><span class="jp-label">MINI</span><span class="jp-value">$500</span></div>
+    </div>
+
+    <div class="dragon-container">
+        <div class="dragon-header">
+            <img src="dragon.png" alt="Dragon" onerror="this.style.display='none'">
+        </div>
+    </div>
+
+    <div class="slot-frame">
+        <canvas id="slotCanvas"></canvas>
+
+        <div id="freeSpinMessage">
+            SCATTER! <br> 8 FREE SPINS <br> ACTIVATED
+        </div>
+
+        <div id="freeSpinScreen">
+            <h1 class="fs-title">FREE SPINS</h1>
+            <div id="fsCount" class="fs-count">8</div>
+            <p class="fs-remaining">REMAINING</p>
+        </div>
+    </div>
+
+    <div class="ui-panel">
+        <div class="stat-box">
+            <span class="stat-label">BALANCE</span>
+            <span class="stat-value">$<span id="balance">1000.00</span></span>
+        </div>
+
+        <button id="spinButton">SPIN</button> 
+
+        <div class="win-display">
+            <div class="stat-box">
+                <span class="stat-label">WIN</span>
+                <span class="win-text">$ <span id="win-amount">0.00</span></span>
+            </div>
+            <div class="bet-selector">
+                <button class="bet-btn" id="decreaseBet">-</button>
+                <div class="stat-box">
+                    <span class="stat-value" id="bet-display">10.00</span>
+                </div>
+                <button class="bet-btn" id="increaseBet">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+
+</body>
+</html>
